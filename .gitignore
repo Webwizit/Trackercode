@@ -1,0 +1,35 @@
+# General
+.DS_Store
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+.env
+*.env
+*.venv
+
+# Django
+backend/staticfiles/
+backend/media/
+backend/db.sqlite3
+
+# Next.js
+my-nextjs-project/.next/
+my-nextjs-project/node_modules/
+my-nextjs-project/.env.local
+my-nextjs-project/.env.development
+my-nextjs-project/.env.production
+
+# Git
+.gitignore
+!.gitignore
