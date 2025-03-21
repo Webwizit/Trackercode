@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Layout/Header";
 import Sidebar from "@/components/Layout/Sidebar";
+import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
+import BootstrapClient from "@/components/BootstrapClient"; // Import the client component
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,21 +32,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+         <BootstrapClient />
         {/* Header Component */}
         <Header />
 
         {/* Main Layout with Sidebar and Children */}
-        <div className="flex">
-          {/* Sidebar Component */}
-          <div className="h-screen">
+       
+      
           <Sidebar />
-          </div>
-
+         
           {/* Main Content Area */}
-          <main className="flex-1 p-4">
+          <main id="main"  className="flex-1 p-4">
             {children}
           </main>
-        </div>
+     
       </body>
     </html>
   );
