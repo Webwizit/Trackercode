@@ -64,19 +64,19 @@ export default function Sidebar() {
   <ul className="pl-6 space-y-1">
     <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-blue-800 transition-all">
       <FaEdit />
-      <Link href="/timesheets/view-edit" className="underline">
+      <Link href="/timesheet/view&edit-timesheet" className="underline">
         View & Edit Timesheet
       </Link>
     </li>
     <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-blue-800 transition-all">
       <FaRegClock />
-      <Link href="/timesheets/time-request" className="underline">
+      <Link href="/timesheet/timerequest" className="underline">
         Time Request
       </Link>
     </li>
     <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-blue-800 transition-all">
       <FaUsers />
-      <Link href="/timesheets/time-editors" className="underline">
+      <Link href="/timesheet/timeeditors" className="underline">
         Time Editors
       </Link>
     </li>
