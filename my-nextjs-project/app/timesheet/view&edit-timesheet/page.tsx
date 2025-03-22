@@ -286,116 +286,117 @@ const ViewEditsheet = () => {
       </div>
 
     {/* Modal for "Add Time" */}
-<Dialog
-  open={isModalOpen}
-  onClose={() => setIsModalOpen(false)}
-  className="fixed inset-0 z-50 overflow-y-auto"
->
-  <div className="flex items-center justify-center min-h-screen">
-    {/* Overlay */}
-    <div className="fixed inset-0 bg-black opacity-30" aria-hidden="true" />
-    <div className="relative bg-white rounded-lg p-6 w-full max-w-md mx-auto shadow-2xl transform transition-all duration-300">
-      <div className="flex justify-between items-center border-b pb-2 mb-4">
-        <Dialog.Title className="text-2xl font-bold text-gray-800">
-          Add Time
-        </Dialog.Title>
-        <button
-          onClick={() => setIsModalOpen(false)}
-          className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
-        >
-          <IoMdClose size={24} />
-        </button>
-      </div>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Date Picker */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Date
-          </label>
-          <input
-            type="date"
-            name="date"
-            className="w-full p-2 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-
-        {/* Project Dropdown */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Project
-          </label>
-          <select
-            name="project"
-            className="w-full p-2 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Select Project</option>
-            <option value="Project 1">Project 1</option>
-            <option value="Project 2">Project 2</option>
-          </select>
-        </div>
-
-        {/* Task Dropdown */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Task
-          </label>
-          <select
-            name="task"
-            className="w-full p-2 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Select Task</option>
-            <option value="Task 1">Task 1</option>
-            <option value="Task 2">Task 2</option>
-          </select>
-        </div>
-
-        {/* Time Selection */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Time
-          </label>
-          <div className="flex gap-2 mt-1">
-            <input
-              type="time"
-              name="startTime"
-              className="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-            <input
-              type="time"
-              name="endTime"
-              className="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+    <Dialog
+      open={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      className="fixed inset-0 z-50 overflow-y-auto"
+    >
+      <div className="flex items-center justify-center min-h-screen">
+        {/* Overlay */}
+        <div className="fixed inset-0 bg-black opacity-30" aria-hidden="true" />
+        <div className="relative bg-white rounded-xl p-6 w-full max-w-md mx-auto shadow-2xl transform transition-all duration-300">
+          {/* Header with accent background */}
+          <div className="flex justify-between items-center rounded-t-xl bg-[#9A4AFD] px-4 py-3">
+            <Dialog.Title className="text-2xl font-bold text-white">
+              Add Time
+            </Dialog.Title>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="text-white hover:text-gray-200 transition-colors duration-200"
+            >
+              <IoMdClose size={24} />
+            </button>
           </div>
+          <form onSubmit={handleSubmit} className="space-y-5 mt-4">
+            {/* Date Picker */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Date
+              </label>
+              <input
+                type="date"
+                name="date"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9A4AFD] focus:border-[#9A4AFD] transition"
+                required
+              />
+            </div>
+
+            {/* Project Dropdown */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Project
+              </label>
+              <select
+                name="project"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#9A4AFD] focus:border-[#9A4AFD] transition"
+                required
+              >
+                <option value="">Select Project</option>
+                <option value="Project 1">Project 1</option>
+                <option value="Project 2">Project 2</option>
+              </select>
+            </div>
+
+            {/* Task Dropdown */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Task
+              </label>
+              <select
+                name="task"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#9A4AFD] focus:border-[#9A4AFD] transition"
+                required
+              >
+                <option value="">Select Task</option>
+                <option value="Task 1">Task 1</option>
+                <option value="Task 2">Task 2</option>
+              </select>
+            </div>
+
+            {/* Time Selection */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Time
+              </label>
+              <div className="flex gap-2 mt-1">
+                <input
+                  type="time"
+                  name="startTime"
+                  className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9A4AFD] focus:border-[#9A4AFD] transition"
+                  required
+                />
+                <input
+                  type="time"
+                  name="endTime"
+                  className="w-1/2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9A4AFD] focus:border-[#9A4AFD] transition"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Activity Description */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Activity Description
+              </label>
+              <textarea
+                name="activityDescription"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9A4AFD] focus:border-[#9A4AFD] transition"
+                rows={3}
+              ></textarea>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-[#9A4AFD] to-indigo-600 hover:from-indigo-600 hover:to-[#9A4AFD] text-white px-4 py-2 rounded-lg transition-colors duration-200 shadow-md"
+            >
+              Add
+            </button>
+          </form>
         </div>
-
-        {/* Activity Description */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Activity Description
-          </label>
-          <textarea
-            name="activityDescription"
-            className="w-full p-2 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
-        >
-          Add
-        </button>
-      </form>
-    </div>
-  </div>
-</Dialog>
-
+      </div>
+    </Dialog>
     </div>
   );
 };
