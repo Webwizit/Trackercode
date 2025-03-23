@@ -34,14 +34,33 @@ body {
 
 aside {
   position: fixed;
-  top: 56px;
+  top: 61px;
+  z-index: 9;
 }
-
+aside ul li.nav-link.active {
+  background: white;
+  border-radius: 25px 0px 0px 25px;
+}
 header#header {
   background: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+aside ul li.nav-link.active svg {
+  filter: invert(1);
+  width: 15px;
+  height: 15px;
+}
 
+aside ul li.nav-link.active {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+aside ul li.nav-link.active a {
+  color: black;
+  text-decoration: none;
+}
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -145,7 +164,9 @@ header#header {
 .header .search-form button i {
   color: #012970;
 }
-
+aside {
+  background-color: #9A4AFD;
+}
 /*--------------------------------------------------------------
 # Header Nav
 --------------------------------------------------------------*/
@@ -293,7 +314,7 @@ main#main {
 }
 
 .h-icons {
-  width: 25px;
+  width: 25px !important;
   color: black;
 }
 
@@ -453,11 +474,71 @@ button.g-button {
     background-color: var(--theme-color-main);
 }
 
+.activity-card .activity-icon {
+  font-size: 40px;
+  color: #8a4af3;
+}
 
 
+.user-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 10px 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+}
+.user-avatar.blue {
+  background-color: #6c9eff;
+}
+.status.active {
+  color: green;
+}
+.status.offline {
+  color: red;
+}
+.user-avatar.orange {
+  background-color: #ffa500;
+}
+.user-avatar.pink {
+  background-color: #ff69b4;
+}
+.status.active {
+  color: green;
+}
+.user-avatar.purple {
+  background-color: #a569bd;
+}
 
+.status.active {
+  color: green;
+}
 
+.dropzone-wrap {
+  background: #9A4AFD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 200px;
+  border-radius: 5px;
+}
 
+.dropzone.dz-clickable {
+  cursor: pointer;
+}
 
 
 
@@ -485,6 +566,6 @@ button.g-button {
 
 @media (min-width: 1200px) {
   .logo {
-      width: 280px;
+      width: 225px;
   }
 }

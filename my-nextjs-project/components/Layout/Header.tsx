@@ -19,8 +19,8 @@ export default function Header() {
       </div>
 
       <div className="search-bar d-flex align-items-center gap-2">
-        <i className="fa-solid fa-clock" style={{ fontSize: "20px" }}></i>
-        <h3 className="page-title mb-0">Default Title</h3>
+        <Image src="/assets/images/dashboard-icon.png" alt=""  width={50} height={50} style={{width: "auto", height: "22px"}} className="" />
+        <h3 className="page-title mb-0">Dashboard</h3>
       </div>
 
       <nav className="header-nav ms-auto">
@@ -34,8 +34,7 @@ export default function Header() {
           {/* Notifications Dropdown */}
           <li className="nav-item dropdown">
             <Link href="#" className="nav-link nav-icon" data-bs-toggle="dropdown">
-            <FontAwesomeIcon icon={faBell} className="h-icons h-notify-bell" />
-              <span className="badge bg-primary badge-number">4</span>
+            <Image src="/assets/images/Notification.png" alt=""  width={50} height={50}  className="h-icons" />   <span className="badge bg-primary badge-number">4</span>
             </Link>
             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
               <li className="dropdown-header">
@@ -65,8 +64,38 @@ export default function Header() {
           {/* Messages Dropdown */}
           <li className="nav-item dropdown">
             <Link href="#" className="nav-link nav-icon" data-bs-toggle="dropdown">
-            <FontAwesomeIcon icon={faMessage} className="h-icons h-msg-icons"/>
+            <Image src="/assets/images/h-chat.png" alt=""  width={50} height={50} className="h-icons" />
               <span className="badge bg-success badge-number">3</span>
+            </Link>
+            <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+              <li className="dropdown-header">
+                You have 3 new messages
+                <Link href="#"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></Link>
+              </li>
+              <li><hr className="dropdown-divider" /></li>
+
+              <li className="message-item">
+                <Link href="#">
+                  <Image src="/assets/projectmanager/img/profile-img.jpg" alt="Profile" width={40} height={40} className="rounded-circle" />
+                  <div>
+                    <h4>Maria Hudson</h4>
+                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                    <p>4 hrs. ago</p>
+                  </div>
+                </Link>
+              </li>
+              <li><hr className="dropdown-divider" /></li>
+
+              <li className="dropdown-footer">
+                <Link href="#">Show all messages</Link>
+              </li>
+            </ul>
+          </li>
+
+          <li className="nav-item dropdown">
+            <Link href="#" className="nav-link nav-icon" data-bs-toggle="dropdown">
+            <Image src="/assets/images/Settings.png" alt=""  width={50} height={50}  className="h-icons" />
+              
             </Link>
             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
               <li className="dropdown-header">

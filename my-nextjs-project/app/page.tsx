@@ -1,6 +1,8 @@
+"use client"
 import Image from "next/image";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 
 export default function Home() {
 
@@ -11,11 +13,36 @@ export default function Home() {
   ];
 
   const productivityTasks = [
-    { name: 'Figma', hours: '2hr', image: <Image src="/assets/images/figma.png" alt="" width={50} height={50} className="" /> },
-    { name: 'Adobe XD', hours: '5hr', image: <Image src="/assets/images/adxd.png" alt="" width={50} height={50} className="" /> },
-    { name: 'JavaScript', hours: '5hr', image: <Image src="/assets/images/js.png" alt="" width={50} height={50} className="" /> },
-    { name: 'Jira', hours: '3hr', image: <Image src="/assets/images/jira.png" alt="" width={50} height={50} className="" /> },
+    { name: 'Figma', hours: '2hr', image: <Image src="/assets/images/figma.png" alt=""  width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
+    { name: 'Adobe XD', hours: '5hr', image: <Image src="/assets/images/adxd.png" alt="" width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
+    { name: 'JavaScript', hours: '5hr', image: <Image src="/assets/images/js.png" alt="" width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
+    { name: 'Jira', hours: '3hr', image: <Image src="/assets/images/jira.png" alt="" width={50} height={50} style={{width: "auto", height: "30px"}} className="" /> },
 ];
+
+
+const productivityTasks2 = [
+  { name: 'Facebook', hours: '2hr', image: <Image src="/assets/images/fb.png" alt=""  width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
+  { name: 'Youtube', hours: '5hr', image: <Image src="/assets/images/yt.png" alt="" width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
+  { name: 'Instagram', hours: '5hr', image: <Image src="/assets/images/insta.png" alt="" width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
+  { name: 'Twitter', hours: '3hr', image: <Image src="/assets/images/twtr.png" alt="" width={50} height={50} style={{width: "auto", height: "30px"}} className="" /> },
+];
+
+
+const attendanceUsers = [
+  { name: 'Mirza Ammad', status: 'Active', color: 'blue' },
+  { name: 'Tahira', status: 'Offline', color: 'orange' },
+  { name: 'Hina Fatima', status: 'Active', color: 'pink' },
+  { name: 'Sohail Imran', status: 'Active', color: 'purple' },
+];
+
+
+const onDrop = useCallback((acceptedFiles: File[]) => {
+  console.log("Dropped files:", acceptedFiles);
+  // Handle file upload logic here
+}, []);
+
+const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
   return (
 <div className="container-fluid">
   <div className="row">
@@ -48,14 +75,7 @@ export default function Home() {
             {/* Timeline Line */}
             <div
               className="position-absolute top-0 bottom-0 start-3 translate-middle bg-body d-none"
-              style={{
-                width: '2px',
-                backgroundColor: '#696969',
-                top: '134px',
-                left: '10px',
-                height: '88%',
-                color: '#FFC107'
-              }}
+             
             ></div>
 
             {/* Timeline Items */}
@@ -154,9 +174,6 @@ export default function Home() {
       </div>
     </div>
 
-
-
-
     <div className="row">
       {/* Today's Activity Section */}
       <div className="col-lg-12 mb-4">
@@ -252,10 +269,10 @@ export default function Home() {
               </>
             ) : (
               productivityTasks.map((task, index) => (
-                <div key={index} className="task-item">
-                  <div className="task-info">
+                <div key={index} className="task-item d-flex align-items-center justify-content-between mb-4">
+                  <div className="task-info d-flex align-items-center gap-3">
                     <div className="task-icon">
-                    <div className="avatar">{task.image}</div>
+                    {task.image}
                     </div>
                     <p className="task-name">{task.name}</p>
                   </div>
@@ -263,6 +280,170 @@ export default function Home() {
                 </div>
               ))
             )}
+          </div>
+        </div>
+      </div>
+
+
+      <div className="col-lg-6 mb-4">
+        <div className="card h-100 border border-2">
+          <div className="card-header d-flex align-items-center justify-content-between">
+            <h5 className="mb-0">Productivity</h5>
+            <div className="dropdown">
+              <button
+                className="btn btn-sm dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                id="Productivity"
+              >
+                Today
+              </button>
+              <ul className="dropdown-menu">
+                {['Yesterday', 'This Week', 'This Month'].map((item, index) => (
+                  <li key={index}>
+                    <a className="dropdown-item prod-item" href="javascript:void(0)">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="card-body text-center activity-card py-5">
+            {productivityTasks2.length === 0 ? (
+              <>
+                <div className="activity-icon">
+                  <img src="/assets/img/Web-Analytics.svg" alt="No Data" />
+                </div>
+                <p className="no-data-text mt-2">
+                  Productivity data of your employees will be displayed here.
+                </p>
+              </>
+            ) : (
+              productivityTasks2.map((task, index) => (
+                <div key={index} className="task-item d-flex align-items-center justify-content-between mb-4">
+                  <div className="task-info d-flex align-items-center gap-3">
+                    <div className="task-icon">
+                    {task.image}
+                    </div>
+                    <p className="task-name">{task.name}</p>
+                  </div>
+                  <p className="task-hours">{task.hours}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="row">
+      {/* Top Members */}
+      <div className="col-lg-4 mb-4">
+        <div className="card h-100 border border-2">
+          <div className="card-header d-flex align-items-center justify-content-between">
+            <h5 className="mb-0">Top Members</h5>
+          </div>
+          <div className="card-body text-center activity-card py-5 d-flex flex-column align-items-center ">
+          <Image src="/assets/images/top-member.png" alt=""  width={50} height={50} className="" />
+            <p className="no-data-text mt-2">
+              Top members will appear here when they track time on the Desktop Tracker.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Attendance */}
+      <div className="col-lg-4 mb-4">
+        <div className="card h-100 border border-2">
+          <div className="card-header d-flex align-items-center justify-content-between">
+            <h5 className="mb-0">Attendance</h5>
+            <div className="dropdown">
+              <button
+                className="btn btn-sm dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                id="Attendance"
+              >
+                Today
+              </button>
+              <ul className="dropdown-menu">
+                {['Yesterday', 'This Week', 'This Month'].map((item, index) => (
+                  <li key={index}>
+                    <a className="dropdown-item" href="javascript:void(0)">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="card-body text-center activity-card py-5">
+            {attendanceUsers.map((user, index) => (
+              <div key={index} className="user-item d-flex justify-content-between">
+                <div className="user-info d-flex align-items-center">
+                  <div className={`user-avatar ${user.color} me-2`}>{user.name.charAt(0)}</div>
+                  <p className="mb-0">{user.name}</p>
+                </div>
+                <p className={`status ${user.status.toLowerCase()} mb-0`}>{user.status}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Activity */}
+      <div className="col-lg-4 mb-4">
+        <div className="card h-100 border border-2">
+          <div className="card-header d-flex align-items-center justify-content-between">
+            <h5 className="mb-0">Activity</h5>
+            <div className="dropdown">
+              <button
+                className="btn btn-sm dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Today
+              </button>
+              <ul className="dropdown-menu">
+                {['Yesterday', 'This Week', 'This Month'].map((item, index) => (
+                  <li key={index}>
+                    <a className="dropdown-item" href="javascript:void(0)">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="card-body text-center activity-card py-5 d-flex flex-column align-items-center ">
+          <Image src="/assets/images/Web Analytics.png" alt=""  width={50} height={50} className="" />
+            <p className="no-data-text mt-2">
+              Activity level data will show here
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="row mb-4">
+      <div className="col-lg-12">
+        <div className="dropzone-wrap " id="drop-zone-main">
+          <div
+            {...getRootProps()}
+            className="dropzone d-flex align-items-center flex-column bg-transparent border-0 text-center p-5 border-dashed border-gray-400 rounded-lg cursor-pointer"
+          >
+            <input {...getInputProps()} />
+            <Image src="/assets/images/dropzone.png" alt=""  width={50} height={50} className="" />
+          
+            <p className="text-white">
+              {isDragActive ? "Drop the files here..." : "Screenshots will appear here shortly after they are taken"}
+            </p>
           </div>
         </div>
       </div>
