@@ -45,10 +45,10 @@ export default function RootLayout({
           <main id="main"  className="flex-1">
             <div className="container-fluid px-0">
               <div className="row">
-                <div className="col-lg-2 px-lg-0">
+                <div className="col-lg-2 px-lg-0 sidebar-col">
                   <Sidebar />
                 </div>
-                <div className="col-lg-10 px-lg-0">
+                <div className="col-lg-10 px-lg-0 content-col">
                   
                   <Header />
                   <div className="content-main px-3">
