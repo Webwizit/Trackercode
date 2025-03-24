@@ -52,7 +52,7 @@ body {
 .sidebar-col{
   background-color: #9A4AFD;
 }
-aside {
+/* aside {
   background-color: #9A4AFD;
   position: fixed;
   top: 0;
@@ -60,14 +60,26 @@ aside {
   overflow-y: auto;
   width: max-content;
   z-index: 9;
-}
-aside nav {
+} */
+/* aside nav {
   position: fixed;
   top: 0;
   left: 0;
   overflow-y: auto;
   height: 100%;
   padding-left: 23px;
+} */
+ aside{
+  position: sticky;
+  top: 0px;
+ }
+aside nav {
+  display: flex
+  ;
+      flex-direction: column;
+      height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
 }
 aside ul li.nav-link.active {
   background: white;
@@ -81,6 +93,8 @@ aside.ps-3.py-4.text-white.h-100 {
 header#header {
   background: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: sticky;
+  top: 0px;
 }
 aside ul li.nav-link.active svg {
   filter: invert(1);
