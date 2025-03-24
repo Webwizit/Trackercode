@@ -33,9 +33,9 @@ body {
 
 
 aside {
-  position: fixed;
-  top: 61px;
+
   z-index: 9;
+  width: 100%;
 }
 aside ul li.nav-link.active {
   background: white;
@@ -93,7 +93,7 @@ aside ul li.nav-link.active a {
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   background-color: #fff;
-  padding-left: 20px;
+
   /* Toggle Sidebar Button */
   /* Search Bar */
 }
@@ -107,12 +107,26 @@ aside ul li.nav-link.active a {
 
 .header .search-bar {
   min-width: 360px;
-  padding: 0 20px;
+  padding: 0 15px;
 }
-
+.sidebar-logo {
+  max-width: 190px;
+  height: auto;
+}
+aside ul li:hover {
+  background: #fff;
+  border-radius: 25px 0 0 25px;
+}
+aside ul li:hover a {
+  color: black;
+}
+aside ul li a {
+  color: white;
+  text-decoration: none;
+}
 @media (max-width: 1199px) {
   .header .search-bar {
-    position: fixed;
+    /* position: fixed;
     top: 50px;
     left: 0;
     right: 0;
@@ -122,7 +136,7 @@ aside ul li.nav-link.active a {
     z-index: 9999;
     transition: 0.3s;
     visibility: hidden;
-    opacity: 0;
+    opacity: 0; */
   }
 
   .header .search-bar-show {
@@ -311,6 +325,7 @@ aside {
 main#main {
   /* height: calc(100vh - 120px); */
   min-height: 100vh;
+  margin-left: 12px;
 }
 
 .h-icons {
@@ -558,10 +573,7 @@ button.g-button {
 
 /* ========Responsive Code=============== */
 @media (min-width: 1200px) {
-  #main, #footer {
-      margin-left: 256px;
-      margin-top: 60px;
-  }
+
 }
 
 @media (min-width: 1200px) {

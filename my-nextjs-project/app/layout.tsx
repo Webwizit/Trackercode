@@ -30,20 +30,34 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
          <BootstrapClient />
         {/* Header Component */}
-        <Header />
+        
 
         {/* Main Layout with Sidebar and Children */}
        
       
-          <Sidebar />
+          
          
           {/* Main Content Area */}
-          <main id="main"  className="flex-1 p-4">
-            {children}
+          <main id="main"  className="flex-1">
+            <div className="container-fluid px-0">
+              <div className="row">
+                <div className="col-lg-2 px-lg-0">
+                  <Sidebar />
+                </div>
+                <div className="col-lg-10 px-lg-0">
+                  
+                  <Header />
+                  <div className="content-main px-3">
+                  {children}
+                  </div>
+                </div>
+              </div>
+            </div>
+           
           </main>
      
       </body>

@@ -2,24 +2,25 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Link from "next/link"; 
+import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faMessage } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function Header() {
-    return (
-      <header id="header" className="header fixed-top d-flex align-items-center">
-      <div className="d-flex align-items-center justify-content-between">
+  return (
+    <header id="header" className="header d-flex align-items-center">
+      
+      {/* <div className="d-flex align-items-center justify-content-between">
         <Link href="/" className="logo d-flex align-items-center">
           <span className="d-none d-lg-block">WEBWIZ </span>
         </Link>
         <i className="bi bi-list toggle-sidebar-btn"></i>
-      </div>
+      </div> */}
 
       <div className="search-bar d-flex align-items-center gap-2">
-        <Image src="/assets/images/dashboard-icon.png" alt=""  width={50} height={50} style={{width: "auto", height: "22px"}} className="" />
+        <Image src="/assets/images/dashboard-icon.png" alt="" width={50} height={50} style={{ width: "auto", height: "22px" }} className="" />
         <h3 className="page-title mb-0">Dashboard</h3>
       </div>
 
@@ -34,7 +35,7 @@ export default function Header() {
           {/* Notifications Dropdown */}
           <li className="nav-item dropdown">
             <Link href="#" className="nav-link nav-icon" data-bs-toggle="dropdown">
-            <Image src="/assets/images/Notification.png" alt=""  width={50} height={50}  className="h-icons" />   <span className="badge bg-primary badge-number">4</span>
+              <Image src="/assets/images/Notification.png" alt="" width={50} height={50} className="h-icons" />   <span className="badge bg-primary badge-number">4</span>
             </Link>
             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
               <li className="dropdown-header">
@@ -64,7 +65,7 @@ export default function Header() {
           {/* Messages Dropdown */}
           <li className="nav-item dropdown">
             <Link href="#" className="nav-link nav-icon" data-bs-toggle="dropdown">
-            <Image src="/assets/images/h-chat.png" alt=""  width={50} height={50} className="h-icons" />
+              <Image src="/assets/images/h-chat.png" alt="" width={50} height={50} className="h-icons" />
               <span className="badge bg-success badge-number">3</span>
             </Link>
             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
@@ -74,7 +75,7 @@ export default function Header() {
               </li>
               <li><hr className="dropdown-divider" /></li>
 
-              <li className="message-item">
+              <li className="message-item">a
                 <Link href="#">
                   <Image src="/assets/projectmanager/img/profile-img.jpg" alt="Profile" width={40} height={40} className="rounded-circle" />
                   <div>
@@ -94,8 +95,8 @@ export default function Header() {
 
           <li className="nav-item dropdown">
             <Link href="#" className="nav-link nav-icon" data-bs-toggle="dropdown">
-            <Image src="/assets/images/Settings.png" alt=""  width={50} height={50}  className="h-icons" />
-              
+              <Image src="/assets/images/Settings.png" alt="" width={50} height={50} className="h-icons" />
+
             </Link>
             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
               <li className="dropdown-header">
@@ -157,5 +158,5 @@ export default function Header() {
       </nav>
     </header>
 
-    );
-  }
+  );
+}
