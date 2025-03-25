@@ -4,6 +4,12 @@ import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { IoMdClose } from "react-icons/io";
 import { jsPDF } from "jspdf";
+import { Bell, Mail, User, Clock, ChevronDown, Plus, Edit, ArrowBigDown, Folder, ListChecks, Calendar } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 
 // Helper to format the date as "Mon 21,2025"
 function formatDate(dateString: string): string {
@@ -44,6 +50,7 @@ const ViewEditsheet = () => {
   const [exportDropdownOpen, setExportDropdownOpen] = useState(false);
   const [timeEntries, setTimeEntries] = useState<any[]>([]);
   const teams = ["Development", "Product Management", "Quality Assurance"];
+  const [date, setDate] = useState('Oct 15, 2024 - Oct 20, 2024');
 
   // Fetch time entries from the Django API
   const fetchTimeEntries = async () => {
@@ -165,67 +172,69 @@ const ViewEditsheet = () => {
   };
 
   return (
-    <div className="p-4 w-full">
-      {/* Top Section */}
-      <div className="flex justify-end space-x-4 items-center mb-4">
-        <select
-          className="border rounded-md px-3 py-2 text-sm"
-          value={selectedTeam}
-          onChange={(e) => setSelectedTeam(e.target.value)}
-        >
-          <option value="">Select Team</option>
-          {teams.map((team, index) => (
-            <option key={index} value={team}>
-              {team}
-            </option>
-          ))}
-        </select>
-        <div className="flex items-center space-x-2">
-          <div className="border px-3 py-2 rounded-md text-sm flex items-center space-x-1">
-            <span className="text-gray-500">📂</span>
-            <span>Projects</span>
-          </div>
-          <input
-            type="text"
-            placeholder="Projects"
-            className="border rounded-md px-3 py-2 text-sm"
-          />
+    <div className="p-4 w-full mx-auto bg-white rounded-xl shadow-md">
+      {/* Header */}
+      <div className="flex items-center justify-between pb-4 border-b">
+        <div className="flex items-center gap-2">
+          <Clock size={24} />
+          <h1 className="text-xl font-bold">Time Sheet</h1>
+        </div>
+        <div className="flex items-center gap-4">
+          <Bell className="cursor-pointer text-black fill-black" />
+          <Mail className="cursor-pointer text-black fill-semiblack" />
+          <Avatar>
+            <AvatarImage src="/assets/images/avtr.jpg" alt="User Avatar" />
+            <AvatarFallback>HR</AvatarFallback>
+          </Avatar>
+        </div>
+      </div>
+      
+      {/* Filters */}
+      <div className="flex gap-2 py-4 flex-wrap">
+      <Button variant="outline" className="flex items-center">
+        <User size={16} className="mr-2" /> Hamza Rasheed
+      </Button>
+      <Button variant="outline" className="flex items-center">
+        <Folder size={16} className="mr-2" /> Projects
+      </Button>
+      <Button variant="outline" className="flex items-center">
+        <ListChecks size={16} className="mr-2" /> Tasks
+      </Button>
+      <Button variant="outline" className="flex items-center">
+        <Calendar size={16} className="mr-2" /> {date}
+        <ChevronDown size={16} className="ml-2" />
+      </Button>
+    </div>
+      
+      {/* Actions */}
+      <div className="flex justify-between py-4">
+        <Button className="flex items-center bg-purple-600 text-white hover:bg-purple-700"
+        onClick={() => setIsModalOpen(true)}>
+          <Plus size={16} className="mr-2" /> Add Time
+        </Button>
+       
+        <div className="flex gap-2">
+          <Button variant="outline" className="flex items-center">
+            <Edit size={16} className="mr-2" /> Edit
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="flex items-center">
+                Columns <ChevronDown size={16} className="ml-2" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>Total Time</DropdownMenuItem>
+              <DropdownMenuItem>Amount Owed</DropdownMenuItem>
+              <DropdownMenuItem>Paid Leave</DropdownMenuItem>
+              <DropdownMenuItem>Absent</DropdownMenuItem>
+              <DropdownMenuItem>Holiday</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex space-x-2 mb-4 mt-10 relative">
-        <div className="relative">
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded-md text-md"
-            onClick={() => setExportDropdownOpen(!exportDropdownOpen)}
-          >
-            📥 Export
-          </button>
-          {exportDropdownOpen && (
-            <div className="absolute left-0 mt-2 w-32 bg-white border rounded-md shadow-lg z-10">
-              <button
-                onClick={exportAsCSV}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-              >
-                CSV
-              </button>
-              <button
-                onClick={exportAsPDF}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-              >
-                PDF
-              </button>
-            </div>
-          )}
-        </div>
-        <button
-          className="bg-blue-600 text-white px-4 py-2 rounded-md text-md"
-          onClick={() => setIsModalOpen(true)}
-        >
-          Add Time
-        </button>
-      </div>
+     
 
       {/* Summary Table Section */}
       <div className="border rounded-md p-4 bg-white mt-10">
@@ -248,7 +257,7 @@ const ViewEditsheet = () => {
       {/* Data Table Section */}
       <div className="border rounded-md overflow-hidden mt-10">
         <table className="w-full text-md text-left">
-          <thead className="bg-blue-600 text-white">
+          <thead className="bg-[#9A4AFD] text-white">
             <tr>
               <th className="p-3 pl-8">Date</th>
               <th className="p-3">Time</th>
