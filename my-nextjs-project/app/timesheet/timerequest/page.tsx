@@ -81,7 +81,7 @@ export default function TimeRequestHeader() {
     >
       <div className="flex items-center justify-center min-h-screen">
         {/* Overlay */}
-        <div className="fixed inset-0 bg-black opacity-30" aria-hidden="true" />
+        <div className="fixed inset-0 bg-black opacity-30 " aria-hidden="true" />
         <div className="relative bg-white rounded-xl p-6 w-full max-w-md mx-auto shadow-2xl transform transition-all duration-300">
           {/* Header */}
           <div className="flex justify-between items-center pb-4 border-b">

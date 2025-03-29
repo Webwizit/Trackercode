@@ -56,6 +56,44 @@ export default function Sidebar() {
               </li>
             </ul>
           )}
+           {/* Projects Dropdown */}
+           <li className="hover:bg-white hover:text-[#9A4AFD] p-2 rounded flex items-center gap-2 transition-all">
+            <FaProjectDiagram />
+            <button onClick={() => toggleMenu("projects")} className="flex-1 text-left text-blue">
+              Projects
+            </button>
+            <FaChevronDown
+              className={`transition-transform ${openMenus["projects"] ? "rotate-180" : ""}`}
+            />
+          </li>
+          {openMenus["projects"] && (
+            <ul className="pl-6 space-y-2">
+              <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-[#9A4AFD] transition-all">
+                <FaFolderOpen />
+                <Link href="/Projects/Createproject" className="underline text-blue">
+                  Create Projects
+                </Link>
+              </li>
+              <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-[#9A4AFD] transition-all">
+                <FaLayerGroup />
+                <Link href="/projects/group" className="underline text-blue">
+                  Projects Group
+                </Link>
+              </li>
+              <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-[#9A4AFD] transition-all">
+                <FaFileContract />
+                <Link href="/projects/contracts" className="underline text-blue">
+                  Contracts
+                </Link>
+              </li>
+              <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-[#9A4AFD] transition-all">
+                <FaArchive />
+                <Link href="/projects/archive" className="underline text-blue">
+                  Archive
+                </Link>
+              </li>
+            </ul>
+          )}
 
           {/* Reports Dropdown */}
           <li className="hover:bg-white hover:text-[#9A4AFD] p-2 rounded flex items-center gap-2 transition-all">
@@ -260,44 +298,7 @@ export default function Sidebar() {
             </ul>
           )}
 
-          {/* Projects Dropdown */}
-          <li className="hover:bg-white hover:text-[#9A4AFD] p-2 rounded flex items-center gap-2 transition-all">
-            <FaProjectDiagram />
-            <button onClick={() => toggleMenu("projects")} className="flex-1 text-left text-blue">
-              Projects
-            </button>
-            <FaChevronDown
-              className={`transition-transform ${openMenus["projects"] ? "rotate-180" : ""}`}
-            />
-          </li>
-          {openMenus["projects"] && (
-            <ul className="pl-6 space-y-2">
-              <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-[#9A4AFD] transition-all">
-                <FaFolderOpen />
-                <Link href="/projects/active" className="underline text-blue">
-                  Active Projects
-                </Link>
-              </li>
-              <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-[#9A4AFD] transition-all">
-                <FaLayerGroup />
-                <Link href="/projects/group" className="underline text-blue">
-                  Projects Group
-                </Link>
-              </li>
-              <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-[#9A4AFD] transition-all">
-                <FaFileContract />
-                <Link href="/projects/contracts" className="underline text-blue">
-                  Contracts
-                </Link>
-              </li>
-              <li className="flex items-center gap-2 p-2 rounded hover:bg-white hover:text-[#9A4AFD] transition-all">
-                <FaArchive />
-                <Link href="/projects/archive" className="underline text-blue">
-                  Archive
-                </Link>
-              </li>
-            </ul>
-          )}
+         
 
           {/* Communication Dropdown */}
           <li className="hover:bg-white hover:text-[#9A4AFD] p-2 rounded flex items-center gap-2 transition-all">

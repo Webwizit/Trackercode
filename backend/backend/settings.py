@@ -42,7 +42,8 @@ INSTALLED_APPS = [
      'rest_framework',
       "rest_framework.authtoken",
     'rest_framework_simplejwt',
-    'corsheaders'
+    'corsheaders',
+    'projects',
 ]
 AUTH_USER_MODEL = 'accounts.CustomUser'
 REST_FRAMEWORK = {
@@ -95,6 +96,10 @@ DATABASES = {
     }
 }
 
+import os
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
