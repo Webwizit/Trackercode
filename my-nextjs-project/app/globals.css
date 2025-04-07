@@ -8,6 +8,7 @@
   /* --theme-color-main:#410093; */
   --theme-color-main:#1A59D6;
   --theme-color-secondary:#4a87ff;
+  --theme-shadow:box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 @theme inline {
@@ -23,14 +24,24 @@
     --foreground: #ededed;
   }
 }
-
+/* global dtyle code  */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-
-
+.rounded-5{
+  border-radius: 5px !important;
+}
+.rounded-10{
+  border-radius: 10px !important;
+}
+.rounded-15{
+  border-radius: 15px !important;
+}
+.g-shadow {
+  box-shadow: 0 1px 4px 2px #b173ff47;
+}
 .g-scroll::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -48,6 +59,55 @@ body {
 	background-color: #9a4afd;
 	border: 2px solid #555555;
 }
+/* ===  */
+
+.g-t-scroll::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.g-t-scroll::-webkit-scrollbar
+{
+	width: 4px;
+	background-color: #F5F5F5;
+}
+
+.g-t-scroll::-webkit-scrollbar-thumb
+{
+	background-color: #9a4afd;
+	border: 2px solid #555555;
+}
+
+/* global style code  */
+.p-multiselect-panel {
+  z-index: 9999 !important;
+}
+
+ul.p-multiselect-items {
+  padding: 0px;
+}
+
+.g-multiselect-wrapper .p-multiselect {
+  
+  height: 37.3px;
+}
+
+.g-multiselect-wrapper .p-multiselect-label {
+  padding: 0px;
+}
+
+.g-multiselect-wrapper span.p-multiselect-token-label {
+  font-size: 12px;
+}
+
+.g-multiselect-wrapper .p-multiselect-label-container {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+/* global style code  */
+
 
 .sidebar-col{
   background-color: #9A4AFD;
@@ -607,14 +667,60 @@ button.g-button {
 
 
 
+/* ======dashboard code new=========== */
+.card.dashboard-top-cards {
+  background-color: #B173FF;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
 
+.card.dashboard-top-cards>img {
+  position: absolute;
+  top: -52px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+}
+.card.dashboard-top-cards .card-body {
+  padding: 40px 15px;
+}
 
+.invite-member-card{
+  border-radius: 10px !important;
+}
+.invite-member-card img {
+  width: 20px;
+  height: 20px;
+}
+.g-table tr th {
+  background-color: #A54EF5;
+  color: white;
+}
 
+.g-table tr th:first-child {
+  border-radius: 8px 0px 0px 0px;
+}
 
+.g-table tr th:last-child {
+  border-radius: 0px 8px 0px 0px;
+}
 
+.g-table>tbody>tr>td {
+  background-color: #EDDFFE;
+}
 
-
-
+.g-table>tbody>tr {
+  border-bottom: 1px solid white;
+}
+.top-members-search {
+  max-width: 240px;
+}
 
 
 

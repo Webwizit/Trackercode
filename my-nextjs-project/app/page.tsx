@@ -1,453 +1,315 @@
-"use client"
+"use client";
 import Image from "next/image";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import { Card } from "react-bootstrap";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { useState } from "react";
+import { Table, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { FaUserPlus } from "react-icons/fa";
 
 export default function Home() {
-
-  const activities = [
-    { avatar: 'HF', time: '0:00' },
-    { avatar: 'HF', time: '0:00' },
-    { avatar: 'HF', time: '0:00' },
+  const users = [
+    { name: "Jenny Wilson", email: "w.lawson@example.com", time: "just now", location: "Austin", image: "/assets/images/recent-log.svg" },
+    { name: "Devon Lane", email: "dat.roberts@example.com", time: "2 hr ago", location: "New York", image: "/assets/images/recent-log.svg" },
+    { name: "Jane Cooper", email: "jgraham@example.com", time: "2 hr ago", location: "Toledo", image: "/assets/images/recent-log.svg" },
+    { name: "Dianne Russell", email: "curtis.d@example.com", time: "1 hr ago", location: "Naperville", image: "/assets/images/recent-log.svg" },
   ];
 
-  const productivityTasks = [
-    { name: 'Figma', hours: '2hr', image: <Image src="/assets/images/figma.png" alt=""  width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
-    { name: 'Adobe XD', hours: '5hr', image: <Image src="/assets/images/adxd.png" alt="" width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
-    { name: 'JavaScript', hours: '5hr', image: <Image src="/assets/images/js.png" alt="" width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
-    { name: 'Jira', hours: '3hr', image: <Image src="/assets/images/jira.png" alt="" width={50} height={50} style={{width: "auto", height: "30px"}} className="" /> },
-];
+
+  // for chart 
+  const data = [
+    { day: "Mon", value: 2, color: "#DCCEFF" },
+    { day: "Tue", value: 8, color: "#AFA5BD" },
+    { day: "Wed", value: 6, color: "#002D99" },
+    { day: "Thu", value: 4, color: "#FFEE33" },
+    { day: "Fri", value: 3, color: "#A36A00" },
+    { day: "Sat", value: 5, color: "#B084F9" },
+    { day: "Sun", value: 6, color: "#FF66B2" },
+  ];
 
 
-const productivityTasks2 = [
-  { name: 'Facebook', hours: '2hr', image: <Image src="/assets/images/fb.png" alt=""  width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
-  { name: 'Youtube', hours: '5hr', image: <Image src="/assets/images/yt.png" alt="" width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
-  { name: 'Instagram', hours: '5hr', image: <Image src="/assets/images/insta.png" alt="" width={50} height={50} style={{width: "auto", height: "40px"}} className="" /> },
-  { name: 'Twitter', hours: '3hr', image: <Image src="/assets/images/twtr.png" alt="" width={50} height={50} style={{width: "auto", height: "30px"}} className="" /> },
-];
+  const Invite_members = [
+    { name: "Invitation Sent", value: 3, color: "#B084F9" },
+    { name: "Accepted", value: 19, color: "#FFEE33" },
+    { name: "Logged In", value: 15, color: "#66B3FF" },
+    { name: "Tracked Time", value: 15, color: "#A36A00" },
+  ];
+  // for chart 
 
 
-const attendanceUsers = [
-  { name: 'Mirza Ammad', status: 'Active', color: 'blue' },
-  { name: 'Tahira', status: 'Offline', color: 'orange' },
-  { name: 'Hina Fatima', status: 'Active', color: 'pink' },
-  { name: 'Sohail Imran', status: 'Active', color: 'purple' },
-];
+  // for members table 
+  const membersData = [
+    { rank: 1, name: "Hamza", role: "Team Lead", score: 98, taskDone: 120, activityHours: 45 },
+    { rank: 2, name: "Ali", role: "Developer", score: 95, taskDone: 110, activityHours: 42 },
+    { rank: 3, name: "Usman", role: "UX Designer", score: 92, taskDone: 105, activityHours: 40 },
+    { rank: 4, name: "Anees", role: "QA Engineer", score: 90, taskDone: 98, activityHours: 38 },
+    { rank: 5, name: "Azam", role: "Marketing", score: 88, taskDone: 70, activityHours: 37 },
+  ];
+
+  const [search, setSearch] = useState("");
+
+  const filteredMembers = membersData.filter((member) =>
+    member.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // for members table 
 
 
-const onDrop = useCallback((acceptedFiles: File[]) => {
-  console.log("Dropped files:", acceptedFiles);
-  // Handle file upload logic here
-}, []);
+  // for members activity table 
 
-const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const membersActivityData = [
+    { task: "Design Homepage UI", assignedTo: "Hamza", assignedBy: "Hamza", deadline: 12-6-25, priority: "High", status: "In Progress" },
+    { task: "Backend API Development", assignedTo: "Usman", assignedBy: "Hamza", deadline: 12-6-25, priority: "High", status: "Not Started" },
+    { task: "Bug Fixing (Login Issue)", assignedTo: "Ali", assignedBy: "Hamza", deadline: 12-6-25, priority: "Medium", status: "Completed" },
+    { task: "Content Writing (Landing Page)", assignedTo: "Azam", assignedBy: "Hamza", deadline: 12-6-25, priority: "Low", status: "In Progress" },
+    { task: "SEO Optimization", assignedTo: "Farhan", assignedBy: "Hamza", deadline: 12-6-25, priority: "Medium", status: "Not Started" },
+  ];
+
+  const [search2, setSearch2] = useState("");
+
+  const filteredActivities = membersActivityData.filter((activity) =>
+    activity.assignedTo.toLowerCase().includes(search.toLowerCase())
+  );
+  // for members activity table 
+
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    console.log("Dropped files:", acceptedFiles);
+    // Handle file upload logic here
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-<div className="container-fluid">
-  <div className="row">
-    <div className="col-lg-6 mb-4">
-      <div className="user-detail-card d-flex align-items-center p-3 border rounded">
-        <div className="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px' }}>
-          HR 
-        </div>
-        <div>
-          <h5 className="mb-0">Hamza Rasheed</h5>
-          <p className="mb-0 text-muted">Hamza's Workplace</p>
-          <div className="owner-icon d-flex align-items-center">
-            <i className="bi bi-person me-1"></i>
-            Owner
-          </div>
+    <div className="container-fluid">
+      <div className="row mt-4 mb-4">
+        <div className="col-lg-12 mb-5">
+          <Card className="d-flex flex-row align-items-center p-3 border-0 rounded-3 g-shadow">
+            <div className="d-flex align-items-center me-3 bg-primary text-white rounded-circle justify-content-center" style={{ width: "50px", height: "50px", fontWeight: "bold", fontSize: "18px" }}>
+              HR
+            </div>
+            <div className="flex-grow-1">
+              <h6 className="mb-0">Hamza Rasheed</h6>
+              <p className="mb-0 text-muted" style={{ fontSize: "14px" }}>Hamza’s Workplace</p>
+              <p className="mb-0 text-muted" style={{ fontSize: "12px" }}>
+                <i className="bi bi-person" /> Owner
+              </p>
+            </div>
+            <div className="text-end">
+              <p className="mb-0" style={{ fontSize: "14px" }}>25th March 2025</p>
+              <p className="mb-0 text-muted" style={{ fontSize: "12px" }}>Tuesday</p>
+            </div>
+          </Card>
         </div>
       </div>
-    </div>
-    <div className="col-lg-6 mb-4">
-      <div className="card py-5"></div>
-    </div>
-  </div>
 
-  <div className="row">
-    <div className="col-lg-6 mb-4">
-      <div className="user-detail-card">
-        <div className="card shadow-none border-0 bg-transparent">
-          <h5 className="fw-bold mb-4">Onboarding</h5>
-          <div className="position-relative">
-            {/* Timeline Line */}
-            <div
-              className="position-absolute top-0 bottom-0 start-3 translate-middle bg-body d-none"
-             
-            ></div>
+      <div className="row">
+        {[
+          { src: "/assets/images/pm.svg", title: "Project Management" },
+          { src: "/assets/images/tm.svg", title: "Task Management" },
+          { src: "/assets/images/rtm.svg", title: "Real-Time Monitoring" },
+          { src: "/assets/images/um.svg", title: "User Management" },
+        ].map((item, index) => (
+          <div key={index} className="col-lg-3 mb-4">
+            <div className="card dashboard-top-cards p-3 text-center">
+              <Image src={item.src} alt={item.title} width={50} height={50} />
+              <div className="card-body">
+                <h5 className="card-title">{item.title}</h5>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="col-lg-8 mb-4">
+          <div className="chart-container g-shadow h-100" style={{ width: "100%", height: 300, padding: 20, background: "#FCFCFF", borderRadius: 10 }}>
+            <h4 style={{ marginBottom: 10, fontWeight: "bold" }}>Task Request</h4>
+            <ResponsiveContainer width="100%" height="90%">
+              <BarChart data={data} barCategoryGap="25%">
+                <XAxis dataKey="day" tick={{ fill: "#666" }} />
+                <YAxis domain={[0, 8]} />
+                <Tooltip />
+                {data.map((entry, index) => (
+                  <Bar key={index} dataKey="value" fill={entry.color} radius={[10, 10, 0, 0]} />
+                ))}
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        <div className="col-lg-4 mb-4">
+          <div className="card p-3 g-shadow border-0 rounded-3 text-white h-100" style={{ backgroundColor: "#A259FF" }}>
+            <h6 className="fw-bold">Recent Login</h6>
+            <p className="mb-3" style={{ fontSize: "14px" }}>Recent login details</p>
+            <ul className="list-unstyled">
+              {users.map((user, index) => (
+                <li key={index} className="d-flex align-items-center mb-3">
+                  <img src={user.image} alt={user.name} className="rounded-circle me-2" width="40" height="40" />
+                  <div className="flex-grow-1">
+                    <h6 className="mb-0 text-white" style={{ fontSize: "14px" }}>{user.name}</h6>
+                    <p className="mb-0 text-white-50" style={{ fontSize: "12px" }}>{user.email}</p>
+                  </div>
+                  <div className="text-end">
+                    <p className="mb-0 text-white" style={{ fontSize: "12px" }}>{user.time}</p>
+                    <p className="mb-0 text-white-50" style={{ fontSize: "12px" }}>{user.location}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="mb-0 fw-bold text-white-50" style={{ fontSize: "14px", cursor: "pointer" }}>SEE ALL &gt;</p>
+          </div>
+        </div>
 
-            {/* Timeline Items */}
-            {[
-              { time: '11:30 AM', role: 'Backend Developer' },
-              { time: '12:30 PM', role: 'Backend Developer' },
-              { time: '02:00 PM', role: 'UX/UI Designer' },
-              { time: '04:00 PM', role: 'UX/UI Designer' }
-            ].map((item, index) => (
-              <div key={index} className="d-flex align-items-center mb-4">
-                <div
-                  className="position-relative onboarding-rounded-circle"
-                  style={{ width: '20px', height: '20px' }}
-                >
-                  <span
-                    className="rounded-circle d-block position-absolute top-50 start-50 translate-middle"
-                    style={{ width: '12px', height: '12px' }}
-                  ></span>
+        <div className="row">
+          <div className="col-lg-4">
+
+            <Card className="d-flex justify-content-center g-shadow h-100 invite-member-card" >
+              <Card.Body className="text-center">
+                {/* Header with Icon */}
+                <div className="d-flex justify-content-between align-items-center">
+                  <Card.Title className="fw-bold">Invite New Members</Card.Title>
+                  <div className="p-2 rounded-circle" style={{ boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)", background: "#EDDFFE " }}>
+                    <Image src="/assets/images/invite.svg" alt="" width={50} height={50} />
+                  </div>
                 </div>
-                <div className="ms-4">
-                  <p className="mb-1 fw-bold">{item.time}</p>
-                  <p className="mb-0 text-muted">{item.role}</p>
-                </div>
-                <div className="ms-auto d-flex onboarding-image-container">
-                  {[1, 2, 3].map((imgIndex) => (
-                    <Image
-                      key={imgIndex}
-                      src="/assets/images/chat-avatar.png"
-                      alt={`Avatar ${imgIndex}`}
-                      width={30}
-                      height={30}
-                      className="circle"
-                    />
+
+                {/* Subtitle */}
+                <p className="mt-2">Invite Members by Email or Link</p>
+
+                {/* Invite Button */}
+                <Button style={{ backgroundColor: "#A54EF5", border: "none", padding: "8px 16px", borderRadius: "6px" }}>
+                  + Invite
+                </Button>
+              </Card.Body>
+            </Card>
+
+          </div>
+          <div className="col-lg-8">
+            <div className="chart-container g-shadow" style={{ width: "100%", height: 350, padding: 20, background: "#FCFCFF", borderRadius: 10 }}>
+              <h4 style={{ textAlign: "center", fontWeight: "bold", marginBottom: 10 }}>Invite Members</h4>
+
+              <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "10px" }}>
+                {Invite_members.map((entry, index) => (
+                  <div key={index} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                    <div style={{ width: 20, height: 10, backgroundColor: entry.color, borderRadius: 2 }}></div>
+                    <span style={{ fontSize: "14px", fontWeight: "bold" }}>{entry.value}</span>
+                  </div>
+                ))}
+              </div>
+
+              <ResponsiveContainer width="100%" height="80%">
+                <BarChart data={Invite_members} barCategoryGap="30%">
+                  <XAxis dataKey="name" tick={{ fill: "#666" }} />
+                  <YAxis domain={[0, 20]} />
+                  <Tooltip />
+                  <Legend />
+                  {Invite_members.map((entry, index) => (
+                    <Bar key={index} dataKey="value" fill={entry.color} radius={[5, 5, 0, 0]} />
                   ))}
-                </div>
-              </div>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-lg-12 mt-4">
+            <div className="d-flex align-items-center justify-content-between">
+              <h4 className="fw-bold">Top Members</h4>
+
+              {/* Search Bar */}
+              <Form.Control
+                type="text"
+                placeholder="Search members here"
+                className="mb-3 top-members-search g-shadow rounded-10"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+
+            </div>
+
+            {/* Table */}
+            <div className="table-responsive g-table-wrap g-t-scroll">
+              <Table hover className="text-center g-table">
+                <thead>
+                  <tr className="text-white" style={{ backgroundColor: "#A54EF5" }}>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Score</th>
+                    <th>Task Done</th>
+                    <th>Activity Hours</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredMembers.map((member) => (
+                    <tr key={member.rank} style={{ backgroundColor: "#F7ECFF" }}>
+                      <td className="fw-bold">{member.rank}</td>
+                      <td>{member.name}</td>
+                      <td>{member.role}</td>
+                      <td>{member.score}</td>
+                      <td style={{ color: member.taskDone >= 100 ? "green" : "inherit" }}>{member.taskDone}</td>
+                      <td>{member.activityHours}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          </div>
+
+
+
+
+
+          <div className="col-lg-12 mt-4">
+            <div className="d-flex align-items-center justify-content-between">
+            <h4 className="fw-bold">Members Activity</h4>
+
+              {/* Search Bar */}
+              <Form.Control
+                type="text"
+                placeholder="Search members here"
+                className="mb-3 top-members-search g-shadow rounded-10"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+
+            </div>
+
+            {/* Table */}
+            <div className="table-responsive g-table-wrap g-t-scroll">
+              <Table hover className="text-center g-table">
+                <thead>
+                  <tr className="text-white" style={{ backgroundColor: "#A54EF5" }}>
+                  <th>Task Name</th>
+              <th>Assigned To</th>
+              <th>Assigned By</th>
+              <th>Deadline</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+            {filteredActivities.map((activity, index) => (
+              <tr key={index} style={{ backgroundColor: "#F7ECFF" }}>
+                <td>{activity.task}</td>
+                <td>{activity.assignedTo}</td>
+                <td>{activity.assignedBy}</td>
+                <td><span className="fw-bold">{activity.deadline}</span></td>
+                <td>{activity.priority}</td>
+                <td>{activity.status}</td>
+                <td><span style={{ color: "blue", cursor: "pointer" }}>Edit</span></td>
+              </tr>
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="col-lg-6 mb-4">
-      <div className="card onboarding bg-transparent h-100">
-        <h5 className="">Help</h5>
-        <div className="icon d-flex justify-content-center">
-        <Image src="/assets/images/agent.png" alt="" width={50} height={50} className="" />
-        </div>
-        <p className="card-text text-muted">
-          Need Help? Search in Help Center or Contact us.
-        </p>
-        <div className="d-flex justify-content-center gap-4 help-btn-wrap">
-          <a href="#" className="btn btn-custom">
-            Go to Help Centre
-          </a>
-          <a href="#" className="btn btn-custom">
-            Contact us
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div className="row mb-4">
-      <div className="col-lg-12">
-        <div className="card member-onboarding p-4">
-          <div className="row">
-            {/* Member Onboarding Status */}
-            <div className="col-md-6 mb-4">
-              <h5 className="fw-bold">Member Onboarding Status</h5>
-              <div className="row px-lg-3 px-0">
-                {[
-                  { label: 'Invitation sent', count: 0 },
-                  { label: 'Invitation Accepted', count: 0 },
-                  { label: 'Logged In', count: 0 },
-                  { label: 'Tracked Time', count: 0 }
-                ].map((item, index) => (
-                  <div key={index} className="col-6">
-                    <p className="fw-bold">{item.label}</p>
-                    <h6>{item.count}</h6>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Invite New Members */}
-            <div className="col-md-6 text-start pl-lg-4 pl-0">
-              <div className="invite-member">
-                <h5 className="fw-bold">Invite New Members</h5>
-                <p>Invite Members by Email or Link</p>
-                <button className="btn g-button">+ Invite</button>
-              </div>
+          </tbody>
+              </Table>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div className="row">
-      {/* Today's Activity Section */}
-      <div className="col-lg-12 mb-4">
-        <div className="card border border-2">
-          <div className="card-header d-flex align-items-center justify-content-between">
-            <h5 className="mb-0">Today's Activity</h5>
-            <div className="dropdown">
-              <button
-                className="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                id="today-activity"
-              >
-                Today
-              </button>
-              <ul className="dropdown-menu">
-                {['Yesterday', 'This Week', 'This Month'].map((item, index) => (
-                  <li key={index}>
-                    <a className="dropdown-item" href="javascript:void(0)">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          <div className="card-body text-center activity-card py-5">
-            {activities.length === 0 ? (
-              <div className="activity-icon">
-                <img
-                  src="https://tracker.webwizit.com/assets/projectmanager/img/Web-Analytics.svg"
-                  alt="No Data"
-                />
-                <p className="no-data-text mt-2">No Data</p>
-              </div>
-            ) : (
-              activities.map((activity, index) => (
-                <div key={index} className="row align-items-center w-100 mb-4">
-                  <div className="col-2">
-                    <div className="avatar">{activity.avatar}</div>
-                  </div>
-                  <div className="col-6 text-center">
-                    <p className="mb-0">{activity.time}</p>
-                  </div>
-                  <div className="col-4">
-                    <div className="circle-progress"></div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Productivity Section */}
-      <div className="col-lg-6 mb-4">
-        <div className="card h-100 border border-2">
-          <div className="card-header d-flex align-items-center justify-content-between">
-            <h5 className="mb-0">Productivity</h5>
-            <div className="dropdown">
-              <button
-                className="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                id="Productivity"
-              >
-                Today
-              </button>
-              <ul className="dropdown-menu">
-                {['Yesterday', 'This Week', 'This Month'].map((item, index) => (
-                  <li key={index}>
-                    <a className="dropdown-item prod-item" href="javascript:void(0)">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="card-body text-center activity-card py-5">
-            {productivityTasks.length === 0 ? (
-              <>
-                <div className="activity-icon">
-                  <img src="/assets/img/Web-Analytics.svg" alt="No Data" />
-                </div>
-                <p className="no-data-text mt-2">
-                  Productivity data of your employees will be displayed here.
-                </p>
-              </>
-            ) : (
-              productivityTasks.map((task, index) => (
-                <div key={index} className="task-item d-flex align-items-center justify-content-between mb-4">
-                  <div className="task-info d-flex align-items-center gap-3">
-                    <div className="task-icon">
-                    {task.image}
-                    </div>
-                    <p className="task-name">{task.name}</p>
-                  </div>
-                  <p className="task-hours">{task.hours}</p>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
-
-
-      <div className="col-lg-6 mb-4">
-        <div className="card h-100 border border-2">
-          <div className="card-header d-flex align-items-center justify-content-between">
-            <h5 className="mb-0">Productivity</h5>
-            <div className="dropdown">
-              <button
-                className="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                id="Productivity"
-              >
-                Today
-              </button>
-              <ul className="dropdown-menu">
-                {['Yesterday', 'This Week', 'This Month'].map((item, index) => (
-                  <li key={index}>
-                    <a className="dropdown-item prod-item" href="javascript:void(0)">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="card-body text-center activity-card py-5">
-            {productivityTasks2.length === 0 ? (
-              <>
-                <div className="activity-icon">
-                  <img src="/assets/img/Web-Analytics.svg" alt="No Data" />
-                </div>
-                <p className="no-data-text mt-2">
-                  Productivity data of your employees will be displayed here.
-                </p>
-              </>
-            ) : (
-              productivityTasks2.map((task, index) => (
-                <div key={index} className="task-item d-flex align-items-center justify-content-between mb-4">
-                  <div className="task-info d-flex align-items-center gap-3">
-                    <div className="task-icon">
-                    {task.image}
-                    </div>
-                    <p className="task-name">{task.name}</p>
-                  </div>
-                  <p className="task-hours">{task.hours}</p>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="row">
-      {/* Top Members */}
-      <div className="col-lg-4 mb-4">
-        <div className="card h-100 border border-2">
-          <div className="card-header d-flex align-items-center justify-content-between">
-            <h5 className="mb-0">Top Members</h5>
-          </div>
-          <div className="card-body text-center activity-card py-5 d-flex flex-column align-items-center ">
-          <Image src="/assets/images/top-member.png" alt=""  width={50} height={50} className="" />
-            <p className="no-data-text mt-2">
-              Top members will appear here when they track time on the Desktop Tracker.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Attendance */}
-      <div className="col-lg-4 mb-4">
-        <div className="card h-100 border border-2">
-          <div className="card-header d-flex align-items-center justify-content-between">
-            <h5 className="mb-0">Attendance</h5>
-            <div className="dropdown">
-              <button
-                className="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                id="Attendance"
-              >
-                Today
-              </button>
-              <ul className="dropdown-menu">
-                {['Yesterday', 'This Week', 'This Month'].map((item, index) => (
-                  <li key={index}>
-                    <a className="dropdown-item" href="javascript:void(0)">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="card-body text-center activity-card py-5">
-            {attendanceUsers.map((user, index) => (
-              <div key={index} className="user-item d-flex justify-content-between">
-                <div className="user-info d-flex align-items-center">
-                  <div className={`user-avatar ${user.color} me-2`}>{user.name.charAt(0)}</div>
-                  <p className="mb-0">{user.name}</p>
-                </div>
-                <p className={`status ${user.status.toLowerCase()} mb-0`}>{user.status}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Activity */}
-      <div className="col-lg-4 mb-4">
-        <div className="card h-100 border border-2">
-          <div className="card-header d-flex align-items-center justify-content-between">
-            <h5 className="mb-0">Activity</h5>
-            <div className="dropdown">
-              <button
-                className="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Today
-              </button>
-              <ul className="dropdown-menu">
-                {['Yesterday', 'This Week', 'This Month'].map((item, index) => (
-                  <li key={index}>
-                    <a className="dropdown-item" href="javascript:void(0)">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="card-body text-center activity-card py-5 d-flex flex-column align-items-center ">
-          <Image src="/assets/images/Web Analytics.png" alt=""  width={50} height={50} className="" />
-            <p className="no-data-text mt-2">
-              Activity level data will show here
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="row mb-4">
-      <div className="col-lg-12">
-        <div className="dropzone-wrap " id="drop-zone-main">
-          <div
-            {...getRootProps()}
-            className="dropzone d-flex align-items-center flex-column bg-transparent border-0 text-center p-5 border-dashed border-gray-400 rounded-lg cursor-pointer"
-          >
-            <input {...getInputProps()} />
-            <Image src="/assets/images/dropzone.png" alt=""  width={50} height={50} className="" />
-          
-            <p className="text-white">
-              {isDragActive ? "Drop the files here..." : "Screenshots will appear here shortly after they are taken"}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
   );
 }
