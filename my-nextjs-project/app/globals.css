@@ -60,7 +60,10 @@ body {
 	border: 2px solid #555555;
 }
 /* ===  */
-
+.g-btn {
+  background-color: #A463F2;
+  padding: 6px 12px;
+}
 .g-t-scroll::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);

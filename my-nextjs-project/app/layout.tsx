@@ -37,10 +37,6 @@ export default function RootLayout({
         
 
         {/* Main Layout with Sidebar and Children */}
-       
-      
-          
-         
           {/* Main Content Area */}
           <main id="main"  className="flex-1">
             <div className="container-fluid px-0">

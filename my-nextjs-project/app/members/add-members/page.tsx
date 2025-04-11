@@ -13,6 +13,8 @@ import 'primeicons/primeicons.css';
 import { MultiSelect } from 'primereact/multiselect';
 import { BiUpload } from "react-icons/bi";
 
+
+
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 
 export default function members() {
@@ -29,18 +31,16 @@ export default function members() {
   
   // for members table 
   const membersActivityData = [
-    { task: "Design Homepage UI", assignedTo: "Hamza", assignedBy: "Hamza", deadline: 12-6-25, priority: "High", status: "In Progress", JobTitle:"ddd", Action:"Edit" },
-    { task: "Backend API Development", assignedTo: "Usman", assignedBy: "Hamza", deadline: 12-6-25, priority: "High", status: "Not Started", JobTitle:"ddd", Action:"Edit"},
-    { task: "Bug Fixing (Login Issue)", assignedTo: "Ali", assignedBy: "Hamza", deadline: 12-6-25, priority: "Medium", status: "Completed",Action:"Edit"},
-    { task: "Content Writing (Landing Page)", assignedTo: "Azam", assignedBy: "Hamza", deadline: 12-6-25, priority: "Low", status: "In Progress",Action:"Edit" },
-    { task: "SEO Optimization", assignedTo: "Farhan", assignedBy: "Hamza", deadline: 12-6-25, priority: "Medium", status: "Not Started", JobTitle:"ddd", Action:"Edit" },
+    { member: "Sajjal Fatima", email: "sajjal@gmail.com", team: "Development", project: "Ecommerce" },
+    { member: "Hamza", email: "Hamza.com", team: "Designing", project: "Ecommerce" },
+    { member: "Usman", email: "Usman@gmail.com", team: "QA", project: "Ecommerce" },
   ];
 
   const [search, setSearch] = useState("");
 
-  const filteredActivities = membersActivityData.filter((activity) =>
-    activity.assignedTo.toLowerCase().includes(search.toLowerCase())
-  );
+  // const filteredActivities = membersActivityData.filter((activity) =>
+  //   activity.assignedTo.toLowerCase().includes(search.toLowerCase())
+  // );
   // for members table 
 
 // for MultiSelect selectbox 
@@ -112,54 +112,7 @@ const data = [
 
   return (
     <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-12 mt-4">
-            <div className="d-flex align-items-center justify-content-between">
-            <h4 className="fw-bold">Members</h4>
-            
-              {/* Search Bar */}
-              <Form.Control
-                type="text"
-                placeholder="Search members here"
-                className="mb-3 top-members-search g-shadow rounded-10"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-
-            </div>
-
-            {/* Table */}
-            <div className="table-responsive g-table-wrap g-t-scroll">
-              <Table hover className="text-center g-table">
-                <thead>
-                  <tr className="text-white" style={{ backgroundColor: "#A54EF5" }}>
-                  <th>Members</th>
-              <th>Members Limit</th>
-              <th>Hourly Rate</th>
-              <th>Member Type</th>
-              <th>Project</th>
-              <th>Teams</th>
-              <th>Job Title</th>
-              <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-            {filteredActivities.map((activity, index) => (
-              <tr key={index} style={{ backgroundColor: "#F7ECFF" }}>
-                <td>{activity.task}</td>
-                <td>{activity.assignedTo}</td>
-                <td>{activity.assignedBy}</td>
-                <td><span className="fw-bold">{activity.deadline}</span></td>
-                <td>{activity.priority}</td>
-                <td>{activity.status}</td>
-                <td><span style={{ color: "blue", cursor: "pointer" }}>Edit</span></td>
-              </tr>
-            ))}
-          </tbody>
-              </Table>
-            </div>
-          </div>
-        </div>
+       
 
         <div className="row mt-3">
       
@@ -213,130 +166,31 @@ const data = [
 
       <div className="mt-3">
         {activeTab === "members" && <div className="p-3 border rounded">
-           <div className="table-responsive">
-        <table className="table align-middle" style={{minWidth:"1450px"}}>
-          {/* Table Header */}
-          <thead className="table-light">
-            <tr>
-              <th>Member</th>
-              <th>Member Limit (wk)</th>
-              <th>Hourly Rate</th>
-              <th>Member Type</th>
-              <th>Projects</th>
-              <th>Team</th>
-              <th>Job Title</th>
-              <th>Actions</th>
+          {/* Table */}
+                     <div className="table-responsive g-table-wrap g-t-scroll">
+                       <Table hover className="text-center g-table">
+                         <thead>
+                           <tr className="text-white" style={{ backgroundColor: "#A54EF5" }}>
+                           <th>Members</th>
+                       <th>Email</th>
+                       <th>Team</th>
+                       <th>project</th>
+                       
+                           </tr>
+                         </thead>
+                         <tbody>
+                         {membersActivityData.map((data, index) => (
+            <tr key={index} className="text-center">
+            
+              <td className="border border-gray-300 px-4 py-2">{data.member}</td>
+              <td className="border border-gray-300 px-4 py-2">{data.email}</td>
+              <td className="border border-gray-300 px-4 py-2">{data.team}</td>
+              <td className="border border-gray-300 px-4 py-2">{data.project}</td>
             </tr>
-          </thead>
-
-          {/* Table Body */}
-          <tbody>
-            <tr>
-              {/* Member Column */}
-              <td className="d-flex align-items-center">
-                <div className="d-flex align-items-center">
-                  <div
-                    className="rounded-circle text-white d-flex align-items-center justify-content-center me-2"
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      backgroundColor: "#A463F2",
-                      fontSize: "14px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    SF
-                  </div>
-                  <div>
-                    <div className="fw-bold">Sajjal Fatima</div>
-                    <small className="text-muted">sajjalfatima232@gmail.com</small>
-                  </div>
-                </div>
-              </td>
-
-              {/* Member Limit Column - Changed to Input Field */}
-              <td>
-                <input
-                  type="number"
-                  className="form-control form-control-sm"
-                  placeholder="Limit"
-                  value={memberLimit}
-                  onChange={(e) => setMemberLimit(e.target.value)}
-                />
-              </td>
-
-              {/* Hourly Rate Column */}
-              <td>
-                <div className="input-group input-group-sm">
-                  <span className="input-group-text">💲</span>
-                  <input
-                    type="number"
-                    className="form-control"
-                    placeholder="Rate"
-                    value={hourlyRate}
-                    onChange={(e) => setHourlyRate(e.target.value)}
-                  />
-                </div>
-              </td>
-
-              {/* Member Type Column */}
-              <td>Owner</td>
-
-              {/* Projects Column */}
-              <td>
-                <button className="btn btn-sm text-white" style={{ backgroundColor: "#A6E3D7" }}>
-                  Getting Started with...
-                </button>
-              </td>
-
-              {/* Team Column */}
-              <td>
-                <select className="form-select form-select-sm">
-                  <option>Select team</option>
-                  <option>Development</option>
-                  <option>Marketing</option>
-                </select>
-              </td>
-
-              {/* Job Title Column */}
-              <td>
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  placeholder="Give new title"
-                  value={jobTitle}
-                  onChange={(e) => setJobTitle(e.target.value)}
-                />
-              </td>
-
-              {/* Actions Column - Changed to Dropdown */}
-              <td>
-                <div className="dropdown">
-                  <button
-                    className="btn btn-light btn-sm dropdown-toggle "
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    ⋮
-                  </button>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">Edit</a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">Remove</a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">View Profile</a>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          ))}
+                   </tbody>
+                       </Table>
+                     </div>
           </div>}
         {activeTab === "onboarding" && <div className="p-3 border rounded">
           <div className="container mt-4">
