@@ -36,8 +36,13 @@ INSTALLED_APPS = [
     'projects',
      "tasks.apps.TasksConfig",   
     'realtimemonitoring',
+    'leave',
+    'shifts'
  
 ]
+import os 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 AUTH_USER_MODEL = "accounts.User"
 
 

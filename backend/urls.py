@@ -10,4 +10,6 @@ urlpatterns = [
      path('api/', include('tasks.urls')),
      path("api/monitor/", include("realtimemonitoring.urls")),
      path("api/auth/", include("accounts.urls")),
+       path("api/", include("leave.urls")),
+       path("api/", include("shifts.urls")),
 ]

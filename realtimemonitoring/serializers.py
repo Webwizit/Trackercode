@@ -6,12 +6,15 @@ from projects.models import Member
 from .models import  WorkSession
 
 class WorkSessionStatusSerializer(serializers.ModelSerializer):
+    # Return the Member’s primary key (i.e. Member.id), not the User’s ID
+    member = serializers.IntegerField(source="member.id", read_only=True)
     total_seconds = serializers.IntegerField(read_only=True)
     status = serializers.SerializerMethodField()
 
     class Meta:
         model = WorkSession
         fields = ["member", "status", "total_seconds"]
+        read_only_fields = ["member", "status", "total_seconds"]
 
     def get_status(self, obj):
         return "active" if obj.is_running else "paused"
