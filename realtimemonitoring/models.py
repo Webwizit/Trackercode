@@ -3,12 +3,18 @@
 from django.db import models
 from django.utils import timezone
 
-from projects.models import Member
+from projects.models import Member, Project
 
 class WorkSession(models.Model):
     member = models.OneToOneField(
         Member, on_delete=models.CASCADE, related_name="current_session"
     )
+    project      = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        null=True,
+        related_name="work_sessions"
+    )  
     start = models.DateTimeField(default=timezone.now)
     accumulated = models.BigIntegerField(default=0)
     is_running = models.BooleanField(default=True)

@@ -12,4 +12,5 @@ urlpatterns = [
      path("api/auth/", include("accounts.urls")),
        path("api/", include("leave.urls")),
        path("api/", include("shifts.urls")),
+         path('api/', include('tracker.urls')),
 ]

@@ -54,3 +54,96 @@ class ShiftRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
 
         self.perform_update(serializer)
         return Response(serializer.data)
+# shifts/views.py
+# shifts/views.py
+# shifts/views.py
+
+from datetime import datetime
+from django.utils import timezone
+from django.db.models import Q
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+from realtimemonitoring.models import WorkSession
+from .models import Shift
+from .serializers import TrackedShiftSerializer
+
+class TrackedShiftsView(APIView):
+    """
+    GET /api/shifts/tracked/?date=YYYY-MM-DD
+    """
+    # permission_classes = [IsAuthenticated]  # enable if you need authentication
+
+    def get(self, request):
+        date_str = request.query_params.get("date")
+        if not date_str:
+            return Response({"detail": "date parameter required"},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        # parse date
+        try:
+            target_date = datetime.fromisoformat(date_str).date()
+        except ValueError:
+            return Response({"detail": "invalid date format"},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        weekday = target_date.strftime("%a")  # e.g. 'Mon'
+
+        shifts = Shift.objects.filter(working_days__icontains=weekday)
+
+        now = timezone.now()
+        output = []
+
+        for shift in shifts:
+            # get all members of this shift
+            members = shift.members.all()
+            member_usernames = list(
+                members.values_list("user__username", flat=True)
+            )
+
+            # filter sessions for that date + those members
+            qs = WorkSession.objects.filter(
+                start__date=target_date,
+                member__in=members
+            )
+
+            # restrict to shift time window on the session start time
+            if shift.start_time < shift.end_time:
+                qs = qs.filter(
+                    start__time__gte=shift.start_time,
+                    start__time__lt= shift.end_time
+                )
+            else:
+                # overnight shift
+                qs = qs.filter(
+                    Q(start__time__gte=shift.start_time) |
+                    Q(start__time__lt= shift.end_time)
+                )
+
+            # now sum durations in Python
+            total_secs = 0
+            for sess in qs:
+                # accumulated is stored in seconds
+                secs = sess.accumulated or 0
+                if sess.is_running:
+                    delta = now - sess.start
+                    secs += int(delta.total_seconds())
+                total_secs += secs
+
+            hours = total_secs // 3600
+            mins  = (total_secs % 3600) // 60
+            tracked_hours = f"{hours}h {mins}m"
+
+            output.append({
+                "id": shift.id,
+                "name": shift.name,
+                "start_time": shift.start_time,
+                "end_time": shift.end_time,
+                "member_usernames": member_usernames,
+                "tracked_hours": tracked_hours,
+            })
+
+        serializer = TrackedShiftSerializer(output, many=True)
+        return Response(serializer.data)
+

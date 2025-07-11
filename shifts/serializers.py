@@ -138,3 +138,16 @@ class ShiftSerializer(serializers.ModelSerializer):
          wd_str = instance.working_days or ""
          ret["working_days"] = [d for d in wd_str.split(",") if d]
          return ret
+
+# your_app/serializers.py
+# shifts/serializers.py
+# shifts/serializers.py
+from rest_framework import serializers
+
+class TrackedShiftSerializer(serializers.Serializer):
+    id               = serializers.IntegerField()
+    name             = serializers.CharField()
+    start_time       = serializers.TimeField(format="%H:%M")
+    end_time         = serializers.TimeField(format="%H:%M")
+    member_usernames = serializers.ListField(child=serializers.CharField())
+    tracked_hours    = serializers.CharField()
